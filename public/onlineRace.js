@@ -395,13 +395,13 @@
 
 // race.js
 const socket = io();
-let isCameraPlayer = false;
+// let isCameraPlayer = false;
 // Retrieve player data from sessionStorage.
 const currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer"));
 const opponent = JSON.parse(sessionStorage.getItem("opponent"));
-if (currentPlayer.playerNumber === 1) {
-  isCameraPlayer = true;
-}
+// if (currentPlayer.playerNumber === 1) {
+//   isCameraPlayer = true;
+// }
 // Immediately reconnect to the room using the persistent token.
 socket.emit("reconnect-player", {
   playerToken: currentPlayer.playerId,
