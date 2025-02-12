@@ -144,6 +144,16 @@ io.on("connection", (socket) => {
       roomId,
     });
   });
+  // --- Updated Control Relay Handler ---
+  socket.on("raceCompleted", (data) => {
+    console.log("Received control data:", data);
+    const { score, finishTime, playerId } = data;
+    io.emit("opponent-score", {
+      score,
+      finishTime,
+      playerId,
+    });
+  });
 
   // Handle disconnection.
   socket.on("disconnect", () => {

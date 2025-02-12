@@ -14,6 +14,8 @@
       <canvas id="miniMapCanvas" class="miniMap"></canvas>
       <div id="statistics"></div>
       <div id="counter"></div>
+      <div id="result"></div>
+        
 
       
       <!-- Include Socket.IO from CDN -->
@@ -66,7 +68,7 @@
     <script src="miniMap.js"></script>
     <script src="sound.js"></script>
     <script src="camera.js"></script>
-    <script src="visualizer.js"></script>
+    <!-- <script src="visualizer.js"></script> -->
     <script src="network.js"></script>
     <script src="sensor.js"></script>
     <script src="utils.js"></script>
@@ -77,11 +79,11 @@
 
     <script src="cameraControls.js"></script>
     <script>
-        // if(currentPlayer.playerNumber == 1)
-        // {
+        if(currentPlayer.playerNumber == 1)
+        {
             const controls = new CameraControls(ironManCanvas);
             myCar.controls = controls;
-        // emitControls();
+        emitControls();}
 
     </script>
 </body>
