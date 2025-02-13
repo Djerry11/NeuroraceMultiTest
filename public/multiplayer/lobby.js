@@ -149,9 +149,13 @@ socket.on("player-joined", (data) => {
 });
 
 socket.on("start-game", ({ player1, player2 }) => {
-  // Save game data in sessionStorage and navigate to the game page.
-  sessionStorage.setItem("currentPlayer", JSON.stringify(player1));
-  sessionStorage.setItem("opponent", JSON.stringify(player2));
+  // Determine the current player based on persistent token.
+  const isPlayer1 = playerToken === player1.playerId;
+  const currentPlayer = isPlayer1 ? player1 : player2;
+  const opponent = isPlayer1 ? player2 : player1;
+  // Save game data in sessionStorage for the race page.
+  sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
+  sessionStorage.setItem("opponent", JSON.stringify(opponent));
   window.location.href = "../multiplayer/race.html";
 });
 

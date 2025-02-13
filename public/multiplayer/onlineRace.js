@@ -159,31 +159,30 @@ function generateCars(currentPlayer, opponent) {
   oppCar.score = 0;
 
   cars.push(oppCar);
-
   return cars;
 }
 
 // --- Send final score and race time to server ---
-// function emitScore(score, finishTime) {
-//   // console.log("Emitting score:", score, finishTime);
-//   const pId = currentPlayer.playerId;
-//   socket.emit("raceCompleted", {
-//     score,
-//     finishTime,
-//     pId,
-//   });
-// }
+function emitScore(score, finishTime) {
+  // console.log("Emitting score:", score, finishTime);
+  const pId = currentPlayer.playerId;
+  socket.emit("raceCompleted", {
+    score,
+    finishTime,
+    pId,
+  });
+}
 
-// socket.on("opponent-score", (data) => {
-//   const { score, finishTime, playerId } = data;
-//   if (opponent.playerId === playerId) {
-//     opponent.score = score;
-//     // opponent.finishTime = finishTime;
-//     // Update the opponent car's finish time so we can compare:
-//     // opponentCar.finishTime = finishTime;
-//     checkOutcome();
-//   }
-// });
+socket.on("opponent-score", (data) => {
+  const { score, finishTime, playerId } = data;
+  if (opponent.playerId === playerId) {
+    opponent.score = score;
+    // opponent.finishTime = finishTime;
+    // Update the opponent car's finish time so we can compare:
+    // opponentCar.finishTime = finishTime;
+    checkOutcome();
+  }
+});
 
 // --- Emit control state to server ---
 // Now we include playerToken and roomId along with the controls.
@@ -202,11 +201,8 @@ function emitControls() {
 // --- Receive opponent control updates ---
 socket.on("opponent-carData", (data) => {
   // data includes { posX, posY, angle, playerId, roomId, controls }
-  // console.log("Received opponent car data:", data);
-  if (
-    data.playerId === opponent.playerId &&
-    data.roomId === currentPlayer.room
-  ) {
+  console.log("Received opponent car data:", data);
+  if (data.playerId === opponent.playerId) {
     opponentCar.controls = data.controls;
     if (
       opponentCar.x !== data.posX ||
