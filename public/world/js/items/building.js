@@ -57,7 +57,7 @@ class Building {
     );
 
     this.base.draw(ctx, {
-      fill: "green",
+      fill: "white",
       stroke: "rgba(0,0,0,0.2)",
       lineWidth: 20,
     });

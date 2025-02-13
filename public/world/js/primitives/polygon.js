@@ -118,7 +118,7 @@ class Polygon {
   draw(
     ctx,
     {
-      stroke = "white",
+      stroke = "blue",
       lineWidth = 2,
       fill = "rgba(0,0,255,0.3)",
       join = "miter",

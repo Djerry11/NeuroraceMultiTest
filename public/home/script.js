@@ -46,11 +46,8 @@ document.getElementById("how-to-play").addEventListener("click", () => {
 document.getElementById("view-profile").addEventListener("click", () => {
   window.location.href = "./view_profile/index.html";
 });
-document.getElementById("view-profile").addEventListener("click", () => {
-  window.location.href = "./view_profile/index.html";
-});
 document.getElementById("single-player").addEventListener("click", () => {
-  window.location.href = "./single_player/car practice/camera.html";
+  window.location.href = "./single_player/carPractice/single_race.html";
 });
 document.getElementById("multi-player").addEventListener("click", () => {
   window.location.href = "../multiplayer/lobby.html";
