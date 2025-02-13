@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Image */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../../images/gamebg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+/* Profile Container with Glassmorphism */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Profile Picture */
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  margin: 10px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #ff9f43;
+  transition: transform 0.3s ease;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+/* Profile Info */
+.profile-info {
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
+
+/* History Section */
+.history {
+  text-align: left;
+}
+
+.history-section {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+.history h2 {
+  text-align: center;
+}
+
+.history h3 {
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #ff9f43;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history li {
+  margin: 5px 0;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 10px;
+}
+
+.btn.logout {
+  background: linear-gradient(45deg, #ff9f43, #e67e22);
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+  }
+  .btn {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+}

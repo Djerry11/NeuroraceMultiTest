@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Car Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="container">
+      <h1>Profile</h1>
+      <div class="profile-info">
+        <div id="img" class="profile-pic"></div>
+        <p><strong>Name:</strong> <span id="userName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+      </div>
+
+      <div class="history">
+        <h2>Race History</h2>
+        <div class="history-section">
+          <h3>Single Player</h3>
+          <ul id="singlePlayerHistory"></ul>
+        </div>
+        <div class="history-section">
+          <h3>Multiplayer</h3>
+          <ul id="multiPlayerHistory"></ul>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn" id="go-back">Go Back</button>
+        <button class="btn logout" id="logout-btn">Logout</button>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

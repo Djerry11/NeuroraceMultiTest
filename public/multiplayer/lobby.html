@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Lobby</title>
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Link to our CSS -->
+    <link rel="stylesheet" href="css/lobby.css" />
+  </head>
+  <body>
+    <!-- Create/Join Forms Container -->
+    <div class="forms-container">
+      <!-- Create Room Form -->
+      <div class="form-panel" id="create-form">
+        <h2>Create Room</h2>
+        <!-- Player's name is taken from their profile (stored in localStorage) -->
+        <label>
+          <input type="checkbox" id="is-public" checked />
+          Public Room
+        </label>
+        <p class="info">
+          (Uncheck for a private room – players will need the room code to
+          join.)
+        </p>
+        <button onclick="createRoom()">Create Room</button>
+      </div>
+
+      <!-- Join Room Form -->
+      <div class="form-panel" id="join-form">
+        <h2>Join Room</h2>
+        <input type="text" id="room-id" placeholder="Enter Room Code" />
+        <button onclick="joinRoom()">Join Room</button>
+      </div>
+    </div>
+
+    <!-- Lobby Section (visible after room creation/join) -->
+    <div class="lobby-section hidden">
+      <h2>Lobby</h2>
+      <p>Room ID: <span id="room-id-display"></span></p>
+      <ul id="players-list"></ul>
+      <button id="start-game-btn" onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Public Rooms Section (vertical card layout) -->
+    <div class="public-rooms-section">
+      <h2>Available Public Rooms</h2>
+      <div id="public-rooms-list"></div>
+    </div>
+
+    <!-- Include Socket.IO client library -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Our lobby JS -->
+    <script src="lobby.js"></script>
+  </body>
+</html>

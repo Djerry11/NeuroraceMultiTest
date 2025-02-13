@@ -1,0 +1,166 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Animation */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../../images/gamebg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(4px);
+  z-index: -1;
+  animation: backgroundMove 10s infinite linear alternate;
+}
+
+@keyframes backgroundMove {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* Welcome Screen */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Logout button styling */
+#logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+#logout-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.7);
+}
+
+/* Welcome container */
+.container {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  max-width: 600px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 1s ease-in-out;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Neon Effect */
+.neon-text {
+  color: rgb(14, 33, 89);
+  text-shadow: 0 0 5px rgb(77, 104, 104), 0 0 10px #0ff, 0 0 15px #0ff;
+  font-size: 3rem;
+}
+
+.highlight {
+  color: #f39c12;
+  font-weight: bold;
+}
+
+.subtext {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Button container */
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Neon Buttons */
+.btn {
+  padding: 14px 24px;
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.neon-btn {
+  background: linear-gradient(45deg, #ff6600, #ff3300);
+  box-shadow: 0 0 10px rgba(255, 102, 0, 0.7);
+}
+
+.neon-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(255, 102, 0, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+  .container h1 {
+    font-size: 2rem;
+  }
+  .container p {
+    font-size: 1rem;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+}
