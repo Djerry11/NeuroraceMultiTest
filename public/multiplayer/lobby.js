@@ -158,6 +158,19 @@ socket.on("start-game", ({ player1, player2 }) => {
   sessionStorage.setItem("opponent", JSON.stringify(opponent));
   window.location.href = "../multiplayer/race.html";
 });
+socket.on("player-joined", (data) => {
+  updatePlayersList(data.players);
+
+  if (playerNumber === 1) {
+    startGameBtn.classList.remove("guest");
+    startGameBtn.classList.add("host");
+    startGameBtn.disabled = false;
+  } else {
+    startGameBtn.classList.remove("host");
+    startGameBtn.classList.add("guest");
+    startGameBtn.disabled = true;
+  }
+});
 
 socket.on("update-rooms", (rooms) => {
   updatePublicRoomsList(rooms);
