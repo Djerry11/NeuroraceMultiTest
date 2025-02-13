@@ -160,3 +160,27 @@ body::before {
   font-size: 0.9rem;
   margin: 5px 0;
 }
+
+.home-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #ff5733;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.home-button:hover {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+}
+
+.home-button i {
+  margin-right: 8px;
+}

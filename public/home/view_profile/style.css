@@ -1,7 +1,9 @@
+/* Reset Styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -9,13 +11,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Poppins", sans-serif;
   color: white;
+  background: url("../../images/gamebg.jpg") no-repeat center center fixed;
+  background-size: cover;
   position: relative;
   overflow: hidden;
 }
 
-/* Background Image */
+/* Background Blur Effect */
 body::before {
   content: "";
   position: absolute;
@@ -23,98 +26,132 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("../../images/gamebg.jpg") no-repeat center center fixed;
-  background-size: cover;
-  filter: blur(8px);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
   z-index: -1;
 }
 
-/* Profile Container with Glassmorphism */
-.container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border-radius: 15px;
-  padding: 2rem;
-  max-width: 500px;
+/* Profile Container */
+.profile-container {
   width: 90%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 2rem;
+  border-radius: 15px;
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Profile Header */
+.profile-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #ff9f43;
+  font-weight: bold;
+}
+
+/* Profile Details */
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 /* Profile Picture */
 .profile-pic {
   width: 120px;
   height: 120px;
-  margin: 10px auto;
   border-radius: 50%;
-  overflow: hidden;
+  background: url("../../images/raceprofile.png") center/cover;
   border: 4px solid #ff9f43;
   transition: transform 0.3s ease;
-}
-
-.profile-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .profile-pic:hover {
   transform: scale(1.1);
 }
 
-/* Profile Info */
-.profile-info {
-  margin-bottom: 20px;
-}
-
-p {
+/* User Info */
+.user-info p {
   font-size: 1.1rem;
   margin: 8px 0;
 }
 
-/* History Section */
-.history {
-  text-align: left;
+.user-info strong {
+  font-weight: bold;
+  color: #ff9f43;
 }
 
-.history-section {
-  margin-top: 15px;
-  padding: 10px;
+/* Race History Section */
+.race-history {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Tabs */
+.history-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 12px 18px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-.history h2 {
-  text-align: center;
+.tab.active {
+  background: #ff9f43;
+  color: black;
 }
 
-.history h3 {
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  font-size: 1.2rem;
-  border-bottom: 2px solid #ff9f43;
-  display: inline-block;
-  padding-bottom: 3px;
+/* Race History List */
+.history-content {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 5px;
 }
 
-.history ul {
+.history-list {
+  display: none;
   list-style: none;
   padding: 0;
 }
 
-.history li {
-  margin: 5px 0;
-  font-size: 1rem;
+.history-list.active {
+  display: block;
+}
+
+.history-list li {
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px;
-  border-radius: 5px;
+  margin: 5px 0;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.history-list li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Buttons */
 .btn-group {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
@@ -127,7 +164,6 @@ p {
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  margin: 10px;
 }
 
 .btn.logout {
@@ -139,12 +175,99 @@ p {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Scrollbar Styling */
+.history-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-content::-webkit-scrollbar-thumb {
+  background: #ff9f43;
+  border-radius: 10px;
+}
+
 @media (max-width: 600px) {
-  .container {
+  .profile-container {
     padding: 1.5rem;
   }
+
+  .profile-header h1 {
+    font-size: 2rem;
+  }
+
   .btn {
     font-size: 0.9rem;
     padding: 10px 15px;
   }
+}
+
+/* General History Item Style */
+.race-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.race-history-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* History Info */
+.history-info {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  flex-wrap: wrap;
+}
+
+.opponent {
+  font-weight: bold;
+  color: #ff9f43;
+}
+
+.result {
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  flex-shrink: inherit;
+}
+
+.result.win {
+  /* background-color: #4caf50; */
+  color: white;
+}
+
+.result.loss {
+  background-color: #f44336;
+  color: white;
+}
+
+.history-time,
+.history-collisions {
+  font-size: 1rem;
+  color: #ff9f43;
+  font-weight: 500;
+}
+
+/* No History Text */
+.no-history {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ff9f43;
+  padding: 10px;
+}
+
+/* Adding some space between list items */
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  margin-bottom: 15px;
 }

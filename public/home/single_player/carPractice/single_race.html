@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <title>Self-driving car - Race</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +46,6 @@
     <script src="../../../world/js/primitives/point.js"></script>
     <script src="../../../world/js/primitives/segment.js"></script>
     <script src="../../../world/js/primitives/polygon.js"></script>
-    <script src="../../../world/js/primitives/carpolygon.js"></script>
     <script src="../../../world/js/primitives/envelope.js"></script>
 
     <!--<script src="../../../world/saves/big.../../../world"></script>-->
@@ -63,12 +63,14 @@
     <script src="utils.js"></script>
     <script src="controls.js"></script>
     <script src="car.js"></script>
-    <script src="race.js"></script>
-    <!-- <script type="module" src="race.js"></script> -->
+    <script type="module" src="../../../firebaseFunctions.js"></script>
+    <!-- <script src="race.js"></script> -->
+    <script  src="race.js"></script>
 
     <script src="cameraControls.js"></script>
 
     <script>
+
       const controls = new CameraControls(ironManCanvas);
       myCar.controls = controls;
     </script>

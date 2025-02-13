@@ -1,4 +1,5 @@
 const gestureLabels = ["R", "1", "2", "3", "4", "None"];
+
 class CameraControls {
   constructor(canvas) {
     this.canvas = canvas;

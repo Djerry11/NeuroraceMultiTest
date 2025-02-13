@@ -177,6 +177,10 @@ function startGame() {
   }
 }
 
+function goHome() {
+  window.location.href = "../home/home.html"; // Change to your actual home menu file
+}
+
 // Expose functions for inline handlers.
 window.startGame = startGame;
 window.showCreateForm = showCreateForm;

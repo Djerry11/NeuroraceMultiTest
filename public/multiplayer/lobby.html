@@ -13,12 +13,16 @@
     <link rel="stylesheet" href="css/lobby.css" />
   </head>
   <body>
+    <!-- Home Button -->
+    <button class="home-button" onclick="goHome()">
+      <i class="fas fa-home"></i> Home
+    </button>
+
     <!-- Create/Join Forms Container -->
     <div class="forms-container">
       <!-- Create Room Form -->
       <div class="form-panel" id="create-form">
         <h2>Create Room</h2>
-        <!-- Player's name is taken from their profile (stored in localStorage) -->
         <label>
           <input type="checkbox" id="is-public" checked />
           Public Room
@@ -56,5 +60,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <!-- Our lobby JS -->
     <script src="lobby.js"></script>
+    
+    </script>
   </body>
 </html>

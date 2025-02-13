@@ -62,14 +62,14 @@ const miniMapGraph = new Graph([], world.graph);
 const miniMap = new MiniMap(miniMapCanvas, world.graph, miniMapWidth, cars);
 
 // --- Optionally load the best brain from sessionStorage ---
-if (sessionStorage.getItem("bestBrain")) {
-  for (let i = 0; i < cars.length; i++) {
-    cars[i].brain = JSON.parse(sessionStorage.getItem("bestBrain"));
-    if (i > 0) {
-      NeuralNetwork.mutate(cars[i].brain, 0.1);
-    }
-  }
-}
+// if (sessionStorage.getItem("bestBrain")) {
+//   for (let i = 0; i < cars.length; i++) {
+//     cars[i].brain = JSON.parse(sessionStorage.getItem("bestBrain"));
+//     if (i > 0) {
+//       NeuralNetwork.mutate(cars[i].brain, 0.1);
+//     }
+//   }
+// }
 
 // --- Create statistics UI for each car ---
 for (let i = 0; i < cars.length; i++) {
@@ -201,7 +201,7 @@ function emitControls() {
 // --- Receive opponent control updates ---
 socket.on("opponent-carData", (data) => {
   // data includes { posX, posY, angle, playerId, roomId, controls }
-  console.log("Received opponent car data:", data);
+  // console.log("Received opponent car data:", data);
   if (data.playerId === opponent.playerId) {
     opponentCar.controls = data.controls;
     if (
@@ -242,7 +242,7 @@ function updateCarProgress(car) {
       car.progress = 1;
       if (!car.finishTime) {
         // Calculate finish time using current time relative to startTime:
-        car.finishTime = Date.now() - startTime;
+        car.finishTime = (Date.now() - startTime) / 1000;
         if (car === myCar) {
           myCar.score = 1;
           // emitScore(1, car.finishTime);
@@ -303,19 +303,38 @@ function startCounter() {
 }
 
 // --- Compare finish times and display result ---
-function checkOutcome() {
+async function checkOutcome() {
+  const firebaseModule = await import("../../../firebaseFunctions.js");
   if (myCar.finishTime != null) {
     if (
       myCar.finishTime < opponentCar.finishTime ||
       opponentCar.finishTime == null
     ) {
       displayResult("You win!");
+      const data = {
+        opponent: opponent.name,
+        time: myCar.finishTime,
+        result: "win",
+      };
+      await firebaseModule.uploadMultiplayerRaceData(data);
       returnToLobby();
     } else if (myCar.finishTime > opponentCar.finishTime) {
       displayResult("You lose!");
+      const data = {
+        opponent: opponent.name,
+        time: myCar.finishTime,
+        result: "lose",
+      };
+      await firebaseModule.uploadMultiplayerRaceData(data);
       returnToLobby();
     } else {
       displayResult("It's a tie!");
+      const data = {
+        opponent: opponent.name,
+        time: myCar.finishTime,
+        result: "tie",
+      };
+      await firebaseModule.uploadMultiplayerRaceData(data);
       returnToLobby();
     }
   }
@@ -361,9 +380,9 @@ function animate() {
     stat.innerText = `${i + 1}: ${cars[i].name}${cars[i].damaged ? " 💀" : ""}`;
     stat.style.backgroundColor = cars[i] === opponentCar ? "black" : "gray";
     if (cars[i].finishTime) {
-      stat.innerHTML += `<span style='float:right;'>${(
-        cars[i].finishTime / 1000
-      ).toFixed(1)}s</span>`;
+      stat.innerHTML += `<span style='float:right;'>${cars[
+        i
+      ].finishTime.toFixed(1)}s</span>`;
     }
   }
   camera.move(myCar);

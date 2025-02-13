@@ -1,8 +1,8 @@
-// import { addRaceHistory } from "/login/home/single_player/carPractice/firestore.js";
-
 const rightPanelWidth = 300;
 
 document.body.style.flexDirection = "column";
+const user = JSON.parse(localStorage.getItem("user"));
+const userId = user.uid;
 
 const carCanvas = document.getElementById("carCanvas");
 carCanvas.width = window.innerWidth;
@@ -16,8 +16,6 @@ const miniMapCanvas = document.getElementById("miniMapCanvas");
 miniMapCanvas.width = rightPanelWidth;
 miniMapCanvas.height = rightPanelWidth;
 
-// statistics.style.width = rightPanelWidth + "px";
-// statistics.style.height = window.innerHeight - rightPanelWidth - 60 + "px";
 let startTime = new Date().getTime();
 const carCtx = carCanvas.getContext("2d");
 const cameraCtx = cameraCanvas.getContext("2d");
@@ -29,20 +27,7 @@ const cars = generateCars(1, "CAMERA");
 // console.log(cars.length);
 const myCar = cars[0];
 myCar.isMyCar = true;
-// const car1 = cars[0];
-// const car2 = cars[1];
 const camera = new Camera(myCar);
-// const camera1 = new Camera(car1);
-// const camera2 = new Camera(car2);
-
-// if (localStorage.getItem("bestBrain")) {
-//   for (let i = 0; i < cars.length; i++) {
-//     cars[i].brain = JSON.parse(localStorage.getItem("bestBrain"));
-//     if (i > 1) {
-//       NeuralNetwork.mutate(cars[i].brain, 0.1);
-//     }
-//   }
-// }
 
 for (let i = 0; i < cars.length; i++) {
   const div = document.createElement("div");
@@ -93,14 +78,14 @@ function generateCars(N, type) {
       color
     );
     car.name = type == "AI" ? "AI" + i : "Me";
-    // car.load(carInfo);
+
     cars.push(car);
   }
   return cars;
 }
 
-function updateCarProgress(car) {
-  console.log("x: ", car.x, "y: ", car.y);
+async function updateCarProgress(car) {
+  // console.log("x: ", car.x, "y: ", car.y);
   if (!car.finishTime) {
     car.progress = 0;
     const carSeg = getNearestSegment(car, world.corridor.skeleton);
@@ -123,13 +108,15 @@ function updateCarProgress(car) {
     if (car.progress >= 1) {
       car.progress = 1;
 
-      car.finishTime = new Date().getTime() - startTime;
+      car.finishTime = (new Date().getTime() - startTime) / 1000;
       const data = {
         time: car.finishTime,
         collisions: car.collisionNumber,
       };
-      addRaceHistory(data);
+      // await uploadSinglePlayerRaceData(data);
       if (car == myCar) {
+        const firebaseModule = await import("../../../firebaseFunctions.js");
+        await firebaseModule.uploadSinglePlayerRaceData(data);
         taDaa();
       }
     }
@@ -225,7 +212,7 @@ function animate() {
       cars[i].speed = 0;
       stat.innerHTML +=
         "<span style='float:right;'>" +
-        (cars[i].finishTime / 60).toFixed(1) +
+        cars[i].finishTime.toFixed(2) +
         "s" +
         " \nCollisions: " +
         cars[i].collisionNumber +
